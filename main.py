@@ -30,10 +30,14 @@ spotify = spotipy.Spotify(
         cache_path="token.txt"
     ))
 
+user_id = spotify.current_user()["id"]
+
 uri = []
 for song in songs_name:
     result = spotify.search(q=f"track: {song} year:{year}", type="track")
-    song_uri = result["tracks"]["items"][0]["uri"]
-    uri.append(song_uri)
-
+    try:
+        song_uri = result["tracks"]["items"][0]["uri"]
+        uri.append(song_uri)
+    except IndexError:
+        print(f"{song} doesnt exist in Spotify. Skipped.")
 print(uri)
