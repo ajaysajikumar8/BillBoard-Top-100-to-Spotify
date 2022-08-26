@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
@@ -15,5 +16,5 @@ spotify = spotipy.Spotify(
         cache_path="token.txt"
     ))
 
-user_id = spotify.current_user()["id"]
-print(user_id)
+result = spotify.search(q="track: Save your tears year: 2022",type="track")
+pprint(result)
