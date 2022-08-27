@@ -40,4 +40,17 @@ for song in songs_name:
         uri.append(song_uri)
     except IndexError:
         print(f"{song} doesnt exist in Spotify. Skipped.")
-print(uri)
+# print(uri)
+
+new_playlist = spotify.user_playlist_create(
+    user=user_id,
+    name=f"{date} Billboard 100",
+    public=False
+)
+
+spotify.playlist_add_items(
+    playlist_id=new_playlist["id"],
+    items=uri
+)
+
+print("New Playlist added")
